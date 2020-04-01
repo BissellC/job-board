@@ -29,6 +29,8 @@
     "stylelint-config-standard": "^20.0.0"
   },
   "dependencies": {
+    "app-app": "^5.1.0",
+    "firebase": "^7.13.1",
     "json": "^9.0.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
