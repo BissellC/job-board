@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
 import firebase from '../firebase'
 
-const NavBar = () => {
+const NavBar = (props) => {
+  const [logOut, setLogOut] = useState(false)
   const signOut = (e) => {
     e.preventDefault()
-    firebase.auth().signOut()
+    firebase.auth().signOut().then(setLogOut(true))
   }
 
-  return (
+  return logOut ? (
+    <Redirect to={'/'} />
+  ) : (
     <nav>
       <header>
         <h1>Job Tree</h1>

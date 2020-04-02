@@ -8,7 +8,7 @@ const HomePage = () => {
   const [signUpPassword, setSignUpPassword] = useState()
   const [loginEmail, setLoginEmail] = useState()
   const [loginPassword, setLoginPassword] = useState()
-  const [authStatus, setAuthStatus] = useState(false)
+  const [authStatus, setAuthStatus] = useState()
 
   const handleSignUp = (e) => {
     e.preventDefault()
@@ -33,13 +33,6 @@ const HomePage = () => {
         let errorCode = error.code
         let errorMessage = error.message
       })
-      .then(function () {
-        firebase.auth().onAuthStateChanged((user) => {
-          if (user) {
-            console.log('logged in')
-          }
-        })
-      })
   }
   const checkAuthState = () => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -52,11 +45,12 @@ const HomePage = () => {
   }
 
   useEffect(() => {
+    setAuthStatus(false)
     checkAuthState()
   }, [])
 
   return authStatus ? (
-    <Redirect to={'/page'} />
+    <Redirect to={'/1'} />
   ) : (
     <>
       <NavBar />
