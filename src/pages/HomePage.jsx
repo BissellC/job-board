@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { Redirect } from 'react-router-dom'
 import NavBar from '../components/NavBar'
 import firebase from '../firebase'
 
@@ -7,6 +8,7 @@ const HomePage = () => {
   const [signUpPassword, setSignUpPassword] = useState()
   const [loginEmail, setLoginEmail] = useState()
   const [loginPassword, setLoginPassword] = useState()
+  const [authStatus, setAuthStatus] = useState(false)
 
   const handleSignUp = (e) => {
     e.preventDefault()
@@ -31,13 +33,31 @@ const HomePage = () => {
         let errorCode = error.code
         let errorMessage = error.message
       })
-      .then((cred) => {
-        console.log(cred)
+      .then(function () {
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            console.log('logged in')
+          }
+        })
       })
   }
+  const checkAuthState = () => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setAuthStatus(true)
+      } else {
+        setAuthStatus(false)
+      }
+    })
+  }
 
-  console.log(firebase)
-  return (
+  useEffect(() => {
+    checkAuthState()
+  }, [])
+
+  return authStatus ? (
+    <Redirect to={'/page'} />
+  ) : (
     <>
       <NavBar />
       <main>
