@@ -1,5 +1,7 @@
 import firebase from 'firebase/app'
+
 import 'firebase/firestore'
+require('firebase/auth')
 
 var firebaseConfig = {
   apiKey: 'AIzaSyBGQO7k6KY0xw7LaMdpMWbdHno0dX7yWUE',
@@ -11,7 +13,7 @@ var firebaseConfig = {
   appId: '1:685552334982:web:b8cb4f32af983a59357907',
   measurementId: 'G-Q05FGFV6YG',
 }
-
+console.log(firebase.auth)
 firebase.initializeApp(firebaseConfig)
 
 export default firebase

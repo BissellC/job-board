@@ -6,10 +6,10 @@ import HomePage from './pages/HomePage'
 import NotFound from './pages/NotFound'
 import firebase from './firebase'
 
-firebase.firestore().collection('tests').add({
+/*firebase.firestore().collection('tests').add({
   userName: 'Bob',
   age: 42,
-})
+})*/
 
 const App = () => {
   return (
