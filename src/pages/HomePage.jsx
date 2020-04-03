@@ -50,7 +50,7 @@ const HomePage = () => {
   }, [])
 
   return authStatus ? (
-    <Redirect to={'/1'} />
+    <Redirect to={'/job-board'} />
   ) : (
     <>
       <NavBar />

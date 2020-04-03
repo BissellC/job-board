@@ -4,6 +4,7 @@ import firebase from '../firebase'
 
 const NavBar = (props) => {
   const [logOut, setLogOut] = useState(false)
+  const [userStatus, setUserStatus] = useState('Log out')
   const signOut = (e) => {
     e.preventDefault()
     firebase.auth().signOut().then(setLogOut(true))
@@ -16,7 +17,7 @@ const NavBar = (props) => {
       <header>
         <h1>Job Tree</h1>
       </header>
-      <div onClick={signOut}>Log out</div>
+      <div onClick={signOut}>{userStatus}</div>
     </nav>
   )
 }

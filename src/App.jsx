@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
-import Page from './pages/Page'
-import Page2 from './pages/Page2'
+import JobBoardPage from './pages/JobBoardPage'
+import PostJobPage from './pages/PostJobPage'
 import HomePage from './pages/HomePage'
 import NotFound from './pages/NotFound'
 import firebase from './firebase'
@@ -16,8 +16,9 @@ const App = () => {
     <Router>
       <Switch>
         <Route exact path="/" component={HomePage}></Route>
-        <Route exact path="/1" component={Page}></Route>
-        <Route exact path="/2" component={Page2}></Route>
+        <Route exact path="/job-board" component={JobBoardPage}></Route>
+        <Route exact path="/job-board/:id" component={JobPage}
+        <Route exact path="/post-job" component={PostJobPage}></Route>
         <Route path="*" component={NotFound}></Route>
       </Switch>
     </Router>
