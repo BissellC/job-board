@@ -9,7 +9,7 @@ const PostJobPage = () => {
   const [companyName, setCompanyName] = useState()
   const [companyAddress, setCompanyAddress] = useState()
   const [estSalary, setEstSalary] = useState()
-  const [jobType, setJobType] = useState()
+  const [jobType, setJobType] = useState('full time')
   const [id, setId] = useState()
   const [isJobPosted, setIsJobPosted] = useState(false)
 
@@ -27,6 +27,7 @@ const PostJobPage = () => {
         companyAddress: companyAddress,
         estimatedSalary: estSalary,
         jobType: jobType,
+        active: true,
         timestamp: new Date().toISOString(),
       })
       .then((post) => {

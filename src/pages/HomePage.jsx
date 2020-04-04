@@ -37,7 +37,7 @@ const HomePage = () => {
         name: name,
         phone: phone,
         email: signUpEmail,
-        timestamp: new Date().toISOString(),
+        timestamp: Math.round(new Date().getTime() / 1000),
       })
       .then(
         firebase

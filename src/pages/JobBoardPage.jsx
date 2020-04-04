@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import NavBar from '../components/NavBar'
 import firebase from '../firebase'
+import moment from 'moment'
 
 const JobBoardPage = () => {
   const [jobs, setJobs] = useState([])
@@ -12,7 +13,9 @@ const JobBoardPage = () => {
     firebase
       .firestore()
       .collection('postings')
+      .where('active', '==', true)
       .get()
+
       .then((postings) => {
         postings.forEach((job) => {
           jobs.push(job.data())
@@ -41,6 +44,7 @@ const JobBoardPage = () => {
                   <h2>{job.jobTitle}</h2>
                   <p className="company-name">{job.companyName}</p>
                   <p>{job.jobDescription}</p>
+                  <p>{moment(job.timestamp).fromNow()}</p>
                 </section>
               </Link>
             )

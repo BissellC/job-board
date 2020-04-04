@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import NavBar from '../components/NavBar'
 import firebase from '../firebase'
+import moment from 'moment'
 
 const JobPage = (props) => {
   const [job, setJob] = useState({})
@@ -35,6 +36,7 @@ const JobPage = (props) => {
         <p>Job type: {job.jobType}</p>
         <p>Estimated Salary: {job.estimatedSalary}</p>
         <p>{job.jobDescription}</p>
+        <p>{moment(job.timestamp).fromNow()}</p>
       </main>
     </>
   )
