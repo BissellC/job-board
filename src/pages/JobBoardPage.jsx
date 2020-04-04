@@ -20,6 +20,7 @@ const JobBoardPage = () => {
         setJobs(jobs)
       })
   }
+  console.log(jobs)
 
   useEffect(() => {
     getJobs()
@@ -35,11 +36,13 @@ const JobBoardPage = () => {
         <section>
           {jobs.map((job) => {
             return (
-              <section>
-                <h2>{job.jobTitle}</h2>
-                <p className="company-name">{job.companyName}</p>
-                <p>{job.jobDescription}</p>
-              </section>
+              <Link to={`/job/${job.id}`}>
+                <section>
+                  <h2>{job.jobTitle}</h2>
+                  <p className="company-name">{job.companyName}</p>
+                  <p>{job.jobDescription}</p>
+                </section>
+              </Link>
             )
           })}
         </section>

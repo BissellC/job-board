@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import firebase from '../firebase'
 
 const NavBar = (props) => {
@@ -15,7 +15,9 @@ const NavBar = (props) => {
   ) : (
     <nav>
       <header>
-        <h1>Job Tree</h1>
+        <Link to="/">
+          <h1>Job Tree</h1>
+        </Link>
       </header>
       <div onClick={signOut}>{userStatus}</div>
     </nav>

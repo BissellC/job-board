@@ -8,31 +8,47 @@ const HomePage = () => {
   const [signUpPassword, setSignUpPassword] = useState()
   const [loginEmail, setLoginEmail] = useState()
   const [loginPassword, setLoginPassword] = useState()
+  const [name, setName] = useState()
+  const [phone, setPhone] = useState()
   const [authStatus, setAuthStatus] = useState()
+  const [jobs, setJobs] = useState([])
+
+  //Populates an array of jobs and sets the first 5 as state
+  const getJobs = () => {
+    const jobs = []
+    firebase
+      .firestore()
+      .collection('postings')
+      .get()
+      .then((postings) => {
+        postings.forEach((job) => {
+          jobs.push(job.data())
+        })
+        setJobs(jobs.slice(0, 4))
+      })
+  }
 
   const handleSignUp = (e) => {
     e.preventDefault()
     firebase
-      .auth()
-      .createUserWithEmailAndPassword(signUpEmail, signUpPassword)
-      .catch(function (error) {
-        let errorCode = error.code
-        let errorMessage = error.message
+      .firestore()
+      .collection('users')
+      .add({
+        name: name,
+        phone: phone,
+        email: signUpEmail,
+        timestamp: new Date().toISOString(),
       })
-      .then((cred) => {
-        console.log(cred)
-      })
+      .then(
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(signUpEmail, signUpPassword)
+      )
   }
 
   const handleLogin = (e) => {
     e.preventDefault()
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(loginEmail, loginPassword)
-      .catch(function (error) {
-        let errorCode = error.code
-        let errorMessage = error.message
-      })
+    firebase.auth().signInWithEmailAndPassword(loginEmail, loginPassword)
   }
   const checkAuthState = () => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -47,6 +63,7 @@ const HomePage = () => {
   useEffect(() => {
     setAuthStatus(false)
     checkAuthState()
+    getJobs()
   }, [])
 
   return authStatus ? (
@@ -61,13 +78,26 @@ const HomePage = () => {
             <form onSubmit={handleSignUp}>
               Sign up
               <input
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Name"
+                required
+              ></input>
+              <input
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Phone"
+                required
+              ></input>
+              <input
+                type="email"
                 onChange={(e) => setSignUpEmail(e.target.value)}
                 placeholder="Email"
+                required
               ></input>
               <input
                 type="password"
                 onChange={(e) => setSignUpPassword(e.target.value)}
                 placeholder="Password"
+                required
               ></input>
               <button>Sign Up</button>
             </form>
@@ -77,15 +107,30 @@ const HomePage = () => {
               <input
                 onChange={(e) => setLoginEmail(e.target.value)}
                 placeholder="Email"
+                required
               ></input>
               <input
                 type="password"
                 onChange={(e) => setLoginPassword(e.target.value)}
                 placeholder="Password"
+                required
               ></input>
               <button>Log in</button>
             </form>
           </section>
+        </section>
+
+        <section className="peek-jobs">
+          <p>Check out these jobs!</p>
+          {jobs.map((job) => {
+            return (
+              <section className="homepage-job">
+                <h2>{job.jobTitle}</h2>
+                <p>{job.companyName}</p>
+                <p>{job.estimatedSalary}</p>
+              </section>
+            )
+          })}
         </section>
       </main>
     </>
