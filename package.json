@@ -29,6 +29,7 @@
     "stylelint-config-standard": "^20.0.0"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.0.0",
     "app-app": "^5.1.0",
     "firebase": "^7.13.1",
     "json": "^9.0.6",

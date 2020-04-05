@@ -28,6 +28,7 @@ const PostJobPage = () => {
         estimatedSalary: estSalary,
         jobType: jobType,
         active: true,
+        appliedEmails: [],
         timestamp: new Date().toISOString(),
       })
       .then((post) => {

@@ -7,6 +7,18 @@ import moment from 'moment'
 const JobBoardPage = () => {
   const [jobs, setJobs] = useState([])
 
+  //workaround to update user on signup
+  const name = localStorage.getItem('name')
+  const updateUser = () => {
+    if (name) {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          user.updateProfile({ displayName: name })
+        }
+      })
+    }
+  }
+
   //Populates an array of jobs and sets it as state
   const getJobs = () => {
     const jobs = []
@@ -23,10 +35,13 @@ const JobBoardPage = () => {
         setJobs(jobs)
       })
   }
+
   console.log(jobs)
+  console.log(firebase.auth().currentUser)
 
   useEffect(() => {
     getJobs()
+    updateUser()
   }, [])
 
   return (

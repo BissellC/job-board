@@ -30,6 +30,7 @@ const HomePage = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault()
+    localStorage.setItem('name', name)
     firebase
       .firestore()
       .collection('users')
@@ -53,6 +54,7 @@ const HomePage = () => {
   const checkAuthState = () => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        console.log(user)
         setAuthStatus(true)
       } else {
         setAuthStatus(false)
