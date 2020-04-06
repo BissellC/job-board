@@ -7,6 +7,9 @@ import moment from 'moment'
 const JobPage = (props) => {
   const [job, setJob] = useState({})
   const [user, setUser] = useState({})
+  const [toggleApply, setToggleApply] = useState(true)
+  const [appliedMessage, setAppliedMessage] = useState('')
+
   var functions = firebase.functions()
 
   const jobQuery = firebase
@@ -38,14 +41,23 @@ const JobPage = (props) => {
     jobQuery.update({
       appliedEmails: firebase.firestore.FieldValue.arrayUnion(user.email),
     })
+    setAppliedMessage(
+      'Thanks for applying ' +
+        user.displayName +
+        ', check your email to confirm application!'
+    )
     //call cloud function
-    const callable = functions.httpsCallable('applyEmail')
-    return callable({
-      email: user.email,
-      userName: user.displayName,
-      jobTitle: job.jobTitle,
-      companyName: job.companyName,
-    })
+    if (toggleApply) {
+      const callable = functions.httpsCallable('applyEmail')
+      return callable({
+        email: user.email,
+        userName: user.displayName,
+        jobTitle: job.jobTitle,
+        companyName: job.companyName,
+      })
+    }
+    //prevents spam clicking of apply
+    setToggleApply(false)
   }
 
   useEffect(() => {
@@ -70,7 +82,7 @@ const JobPage = (props) => {
           <button className="apply-button" onClick={() => applyEmail()}>
             Apply now
           </button>
-          <p></p>
+          <p>{appliedMessage}</p>
         </section>
       </main>
     </>
