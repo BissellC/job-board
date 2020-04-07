@@ -7,9 +7,9 @@ const PostJobPage = () => {
   const [jobTitle, setJobTitle] = useState()
   const [jobDescription, setJobDescription] = useState()
   const [companyName, setCompanyName] = useState()
-  const [companyAddress, setCompanyAddress] = useState()
   const [estSalary, setEstSalary] = useState()
   const [jobType, setJobType] = useState('full time')
+  const [location, setLocation] = useState()
   const [id, setId] = useState()
   const [isJobPosted, setIsJobPosted] = useState(false)
 
@@ -24,7 +24,7 @@ const PostJobPage = () => {
         jobTitle: jobTitle,
         jobDescription: jobDescription,
         companyName: companyName,
-        companyAddress: companyAddress,
+        location: location,
         estimatedSalary: estSalary,
         jobType: jobType,
         active: true,
@@ -72,8 +72,8 @@ const PostJobPage = () => {
             required
           ></input>
           <input
-            placeholder="Company Address"
-            onChange={(e) => setCompanyAddress(e.target.value)}
+            placeholder="Location"
+            onChange={(e) => setLocation(e.target.value)}
             required
           ></input>
           <select

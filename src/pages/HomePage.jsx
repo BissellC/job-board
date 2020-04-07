@@ -71,71 +71,74 @@ const HomePage = () => {
   return authStatus ? (
     <Redirect to={'/job-board'} />
   ) : (
-    <>
+    <div className="wrapper">
       <NavBar />
-      <main>
+      <main className="homepage-main">
         <section className="login">
-          <p>Please Sign Up or Log In</p>
           <section>
-            <form onSubmit={handleSignUp}>
-              Sign up
-              <input
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Name"
-                required
-              ></input>
-              <input
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="Phone"
-                required
-              ></input>
-              <input
-                type="email"
-                onChange={(e) => setSignUpEmail(e.target.value)}
-                placeholder="Email"
-                required
-              ></input>
-              <input
-                type="password"
-                onChange={(e) => setSignUpPassword(e.target.value)}
-                placeholder="Password"
-                required
-              ></input>
-              <button>Sign Up</button>
-            </form>
+            <p>Please Sign Up or Log In</p>
+            <div>
+              <form onSubmit={handleSignUp}>
+                Sign up
+                <input
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Name"
+                  required
+                ></input>
+                <input
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="Phone"
+                  required
+                ></input>
+                <input
+                  type="email"
+                  onChange={(e) => setSignUpEmail(e.target.value)}
+                  placeholder="Email"
+                  required
+                ></input>
+                <input
+                  type="password"
+                  onChange={(e) => setSignUpPassword(e.target.value)}
+                  placeholder="Password"
+                  required
+                ></input>
+                <button>Sign Up</button>
+              </form>
 
-            <form onSubmit={handleLogin}>
-              Log in
-              <input
-                onChange={(e) => setLoginEmail(e.target.value)}
-                placeholder="Email"
-                required
-              ></input>
-              <input
-                type="password"
-                onChange={(e) => setLoginPassword(e.target.value)}
-                placeholder="Password"
-                required
-              ></input>
-              <button>Log in</button>
-            </form>
+              <form onSubmit={handleLogin}>
+                Log in
+                <input
+                  onChange={(e) => setLoginEmail(e.target.value)}
+                  placeholder="Email"
+                  required
+                ></input>
+                <input
+                  type="password"
+                  onChange={(e) => setLoginPassword(e.target.value)}
+                  placeholder="Password"
+                  required
+                ></input>
+                <button>Log in</button>
+              </form>
+            </div>
           </section>
         </section>
 
         <section className="peek-jobs">
-          <p>Check out these jobs!</p>
+          <header>Check out these jobs!</header>
           {jobs.map((job) => {
             return (
               <section className="homepage-job">
-                <h2>{job.jobTitle}</h2>
-                <p>{job.companyName}</p>
-                <p>{job.estimatedSalary}</p>
+                <p className="job-title-hp">{job.jobTitle}</p>
+                <p className="company-name-hp">{job.location}</p>
+                <p className="salary-hp">{job.estimatedSalary}</p>
               </section>
             )
           })}
+          <p className="peek-jobs-msg">Sign Up or Log in to view more</p>
         </section>
       </main>
-    </>
+    </div>
   )
 }
 
