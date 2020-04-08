@@ -38,39 +38,24 @@ const JobBoardPage = () => {
 
     // awaits job fetch and shortens descriptions if they are too long
     const newJobs = jobs.map((job) => {
-      if (job.jobDescription.length > 50) {
+      if (job.jobDescription.length > 100) {
         const fixedDescription = {
-          jobDescription: job.jobDescription.slice(0, 49) + '...',
+          jobDescription: job.jobDescription.slice(0, 99) + '...',
         }
         console.log(job)
         return { ...job, ...fixedDescription }
       } else return { ...job }
     })
     setJobs(newJobs)
-  }
-
-  const fixDescription = () => {
-    const newJobs = jobs.map((job) => {
-      if (job.jobDescription.length > 50) {
-        const fixedDescription = {
-          jobDescription: job.jobDescription.slice(0, 49) + '...',
-        }
-        console.log(job)
-        return { ...job, ...fixedDescription }
-      } else return { ...job }
-    })
-    setJobs(newJobs)
-    console.log(newJobs)
+    console.log(jobs)
   }
 
   useEffect(() => {
     getJobs()
   }, [])
 
-  useEffect(() => {}, [jobs])
-
   return (
-    <>
+    <div className="job-board-wrapper">
       <NavBar />
       <Link className="post-job-button" to="/post-job">
         <p>Make a job posting</p>
@@ -86,7 +71,9 @@ const JobBoardPage = () => {
                   <p className="location">{job.location}</p>
                   <div>
                     <p className="description">{job.jobDescription}</p>
-                    <p>{moment(job.timestamp).fromNow()}</p>
+                    <p className="timestamp">
+                      {moment(job.timestamp).fromNow()}
+                    </p>
                   </div>
                 </section>
               </Link>
@@ -94,7 +81,7 @@ const JobBoardPage = () => {
           })}
         </section>
       </main>
-    </>
+    </div>
   )
 }
 

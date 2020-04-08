@@ -12,6 +12,15 @@ const PostJobPage = () => {
   const [location, setLocation] = useState()
   const [id, setId] = useState()
   const [isJobPosted, setIsJobPosted] = useState(false)
+  const [user, setUser] = useState({})
+
+  const getUser = () => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user)
+      }
+    })
+  }
 
   const postJob = (e) => {
     e.preventDefault()
@@ -30,6 +39,7 @@ const PostJobPage = () => {
         active: true,
         appliedEmails: [],
         timestamp: new Date().toISOString(),
+        createdBy: user.email,
       })
       .then((post) => {
         if (post) {
@@ -47,6 +57,10 @@ const PostJobPage = () => {
       setIsJobPosted(true)
     }
   }, [id])
+
+  useEffect(() => {
+    getUser()
+  }, [])
 
   return isJobPosted ? (
     <Redirect to={`/job/${id}`} />

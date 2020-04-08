@@ -9,6 +9,7 @@ const JobPage = (props) => {
   const [user, setUser] = useState({})
   const [toggleApply, setToggleApply] = useState(true)
   const [appliedMessage, setAppliedMessage] = useState('')
+  const [removeMessage, setRemoveMessage] = useState('')
 
   var functions = firebase.functions()
 
@@ -60,6 +61,24 @@ const JobPage = (props) => {
     setToggleApply(false)
   }
 
+  //Sets posting to inactive if user created it
+  const removePosting = () => {
+    if (user.email == job.createdBy) {
+      firebase
+        .firestore()
+        .collection('postings')
+        .doc(props.match.params.id)
+        .update({
+          active: false,
+        })
+      setRemoveMessage('Posting has been deactivated')
+    } else {
+      setRemoveMessage(
+        'You cannot delete this post because you did not create it'
+      )
+    }
+  }
+
   useEffect(() => {
     getJob()
     getUser()
@@ -83,6 +102,10 @@ const JobPage = (props) => {
             Apply now
           </button>
           <p>{appliedMessage}</p>
+        </section>
+        <section className="remove">
+          <button onClick={() => removePosting()}>Remove posting</button>
+          <p>{removeMessage}</p>
         </section>
       </main>
     </>

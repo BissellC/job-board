@@ -174,17 +174,22 @@ nav {
 
     section {
       padding: 0.5rem;
-      border: 1px solid gray;
-      margin: 0.25rem;
+      margin: 0.5rem;
+      box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.75);
 
       div {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         color: gray;
       }
 
       .location {
         margin-bottom: 0;
+      }
+
+      .timestamp {
+        padding-left: 0.5rem;
       }
     }
 
@@ -196,11 +201,28 @@ nav {
       }
     }
   }
+}
 
+.job-board-wrapper {
   .post-job-button {
-    margin: 0;
     p {
-      margin: 0;
+      text-align: center;
+      padding: 1rem;
+      background: rgb(226, 226, 226);
+      background: linear-gradient(
+        150deg,
+        rgba(226, 226, 226, 1) 0%,
+        rgba(255, 255, 255, 1) 100%
+      );
+      font-size: 20px;
+      color: black;
+      box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.75);
+    }
+  }
+  .post-job-button:hover {
+    color: blue;
+    p {
+      color: blue;
     }
   }
 }
@@ -210,5 +232,23 @@ nav {
     display: flex;
     justify-content: space-around;
     margin-top: 5rem;
+  }
+
+  .job-board-main {
+    margin-left: 10rem;
+    margin-right: 10rem;
+    a {
+      section {
+        box-shadow: none;
+        border-bottom: 1px solid gainsboro;
+      }
+    }
+  }
+
+  .post-job-button {
+    p {
+      margin-left: 35rem;
+      margin-right: 35rem;
+    }
   }
 }
