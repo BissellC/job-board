@@ -6,6 +6,7 @@ import moment from 'moment'
 
 const JobBoardPage = () => {
   const [jobs, setJobs] = useState([])
+  const [newJobs, setNewJobs] = useState([])
 
   //workaround to update user on signup
   const name = localStorage.getItem('name')
@@ -20,9 +21,9 @@ const JobBoardPage = () => {
   }
 
   //Populates an array of jobs and sets it as state
-  const getJobs = () => {
+  const getJobs = async () => {
     const jobs = []
-    firebase
+    await firebase
       .firestore()
       .collection('postings')
       .where('active', '==', true)
@@ -34,32 +35,59 @@ const JobBoardPage = () => {
         })
         setJobs(jobs)
       })
+
+    // awaits job fetch and shortens descriptions if they are too long
+    const newJobs = jobs.map((job) => {
+      if (job.jobDescription.length > 50) {
+        const fixedDescription = {
+          jobDescription: job.jobDescription.slice(0, 49) + '...',
+        }
+        console.log(job)
+        return { ...job, ...fixedDescription }
+      } else return { ...job }
+    })
+    setJobs(newJobs)
   }
 
-  console.log(jobs)
-  console.log(firebase.auth().currentUser)
+  const fixDescription = () => {
+    const newJobs = jobs.map((job) => {
+      if (job.jobDescription.length > 50) {
+        const fixedDescription = {
+          jobDescription: job.jobDescription.slice(0, 49) + '...',
+        }
+        console.log(job)
+        return { ...job, ...fixedDescription }
+      } else return { ...job }
+    })
+    setJobs(newJobs)
+    console.log(newJobs)
+  }
 
   useEffect(() => {
     getJobs()
-    updateUser()
   }, [])
+
+  useEffect(() => {}, [jobs])
 
   return (
     <>
       <NavBar />
-      <Link to="/post-job">
+      <Link className="post-job-button" to="/post-job">
         <p>Make a job posting</p>
       </Link>
-      <main>
+      <main className="job-board-main">
         <section>
           {jobs.map((job) => {
             return (
               <Link to={`/job/${job.id}`}>
                 <section>
-                  <h2>{job.jobTitle}</h2>
+                  <h2 className="job-title">{job.jobTitle}</h2>
                   <p className="company-name">{job.companyName}</p>
-                  <p>{job.jobDescription}</p>
-                  <p>{moment(job.timestamp).fromNow()}</p>
+                  <p className="location">{job.location}</p>
+                  <div>
+                    <p className="description">{job.jobDescription}</p>
+                    <p>{moment(job.timestamp).fromNow()}</p>
+                  </div>
                 </section>
               </Link>
             )

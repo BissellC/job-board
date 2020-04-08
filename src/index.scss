@@ -4,21 +4,20 @@
 
 html {
   height: 100%;
+  background: rgba(139, 219, 0, 1);
 }
 
 body {
   margin: 0;
   min-height: 100%;
   font-family: 'Source Sans Pro', sans-serif;
-  background: rgb(19, 117, 0);
+  background: rgba(139, 219, 0, 1);
   background: linear-gradient(
     150deg,
     rgba(19, 117, 0, 1) 0%,
     rgba(139, 219, 0, 1) 100%
   );
-}
-
-.wrapper {
+  background-repeat: no-repeat;
 }
 
 nav {
@@ -136,10 +135,73 @@ nav {
       font-size: 18px;
       font-weight: bold;
     }
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .time-hp {
+        font-size: 12px;
+      }
+    }
+
+    .location-hp {
+      margin-bottom: 0;
+    }
   }
 
   .peek-jobs-msg {
     text-align: center;
+  }
+}
+
+.job-board-main {
+  background: rgb(226, 226, 226);
+  background: linear-gradient(
+    150deg,
+    rgba(226, 226, 226, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  padding: 1rem;
+  margin: 2rem;
+  margin-top: 0;
+  box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.75);
+
+  a {
+    text-decoration: none;
+    color: black;
+
+    section {
+      padding: 0.5rem;
+      border: 1px solid gray;
+      margin: 0.25rem;
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        color: gray;
+      }
+
+      .location {
+        margin-bottom: 0;
+      }
+    }
+
+    section:hover {
+      box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.75);
+
+      .job-title {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .post-job-button {
+    margin: 0;
+    p {
+      margin: 0;
+    }
   }
 }
 

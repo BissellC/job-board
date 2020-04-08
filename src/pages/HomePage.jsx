@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import NavBar from '../components/NavBar'
 import firebase from '../firebase'
+import moment from 'moment'
 
 const HomePage = () => {
   const [signUpEmail, setSignUpEmail] = useState()
@@ -130,8 +131,12 @@ const HomePage = () => {
             return (
               <section className="homepage-job">
                 <p className="job-title-hp">{job.jobTitle}</p>
-                <p className="company-name-hp">{job.location}</p>
-                <p className="salary-hp">{job.estimatedSalary}</p>
+                <p className="company-name-hp">{job.companyName}</p>
+                <p className="location-hp">{job.location}</p>
+                <div>
+                  <p className="salary-hp">{job.estimatedSalary}</p>
+                  <p className="time-hp">{moment(job.timestamp).fromNow()}</p>
+                </div>
               </section>
             )
           })}
