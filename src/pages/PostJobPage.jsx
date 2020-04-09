@@ -67,7 +67,7 @@ const PostJobPage = () => {
   ) : (
     <>
       <NavBar />
-      <main>
+      <main className="post-job-main">
         <h1>Make a job posting</h1>
         <form onSubmit={postJob}>
           <input
@@ -75,11 +75,11 @@ const PostJobPage = () => {
             onChange={(e) => setJobTitle(e.target.value)}
             required
           ></input>
-          <input
+          <textarea
             placeholder="Job Description"
             onChange={(e) => setJobDescription(e.target.value)}
             required
-          ></input>
+          ></textarea>
           <input
             placeholder="Company Name"
             onChange={(e) => setCompanyName(e.target.value)}

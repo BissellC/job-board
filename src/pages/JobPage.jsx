@@ -11,6 +11,7 @@ const JobPage = (props) => {
   const [appliedMessage, setAppliedMessage] = useState('')
   const [removeMessage, setRemoveMessage] = useState('')
   const [appliedUsers, setAppliedUsers] = useState([])
+  const [appliedText, setAppliedText] = useState('')
 
   var functions = firebase.functions()
 
@@ -34,6 +35,11 @@ const JobPage = (props) => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         setUser(user)
+        //shows emails of users who applied if the user created the job posting
+        if (user.email == job.createdBy) {
+          setAppliedUsers(job.appliedEmails)
+          setAppliedText('Applied:')
+        }
       }
     })
   }
@@ -80,18 +86,13 @@ const JobPage = (props) => {
     }
   }
 
-  //fetch emails of users who applied if you created it
-  const getApplied = () => {
-    if (user.email == job.createdBy) {
-      setAppliedUsers(job.appliedEmails)
-    }
-  }
-
   useEffect(() => {
     getJob()
-    getUser()
-    getApplied()
   }, [])
+
+  useEffect(() => {
+    getUser()
+  }, [job])
 
   return (
     <>
@@ -118,6 +119,12 @@ const JobPage = (props) => {
             <p>{removeMessage}</p>
           </section>
         </div>
+        <section className="applied">
+          <p>{appliedText}</p>
+          {appliedUsers.map((user) => {
+            return <p>{user}</p>
+          })}
+        </section>
       </main>
     </>
   )

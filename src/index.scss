@@ -238,8 +238,10 @@ nav {
   );
   padding: 2rem;
   margin: 2rem;
+  box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.75);
 
   .job-info {
+    text-align: center;
     h1 {
       margin: 0;
     }
@@ -255,6 +257,58 @@ nav {
       background-color: white;
       padding: 0.5rem;
       border-radius: 5px;
+    }
+  }
+
+  .applied {
+    text-align: center;
+  }
+}
+
+.post-job-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    color: white;
+    font-weight: bold;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background: rgb(226, 226, 226);
+    background: linear-gradient(
+      150deg,
+      rgba(226, 226, 226, 1) 0%,
+      rgba(255, 255, 255, 1) 100%
+    );
+    margin: 1rem;
+    margin-top: 0.5rem;
+    align-items: center;
+
+    input {
+      margin: 1rem;
+      padding: 0.1rem;
+    }
+
+    textarea {
+      width: 10rem;
+      height: 8rem;
+    }
+
+    select {
+      border: 1px solid black;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    button {
+      padding: 0.5rem;
+      border: 1px solid black;
+      font-size: 20px;
     }
   }
 }
@@ -281,6 +335,22 @@ nav {
     p {
       margin-left: 35rem;
       margin-right: 35rem;
+    }
+  }
+
+  .job-page-main {
+    margin-left: 20rem;
+    margin-right: 20rem;
+  }
+
+  .post-job-main {
+    form {
+      select {
+        font-size: 16px;
+      }
+      textarea {
+        width: 25rem;
+      }
     }
   }
 }
