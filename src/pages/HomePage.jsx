@@ -20,6 +20,7 @@ const HomePage = () => {
     firebase
       .firestore()
       .collection('postings')
+      .where('active', '==', true)
       .get()
       .then((postings) => {
         postings.forEach((job) => {

@@ -20,7 +20,7 @@ const JobPage = (props) => {
     .collection('postings')
     .doc(props.match.params.id)
 
-  //retrieve data by id
+  //retrieve job data by id
   const getJob = () => {
     jobQuery.get().then((job) => {
       if (job.exists) {
@@ -35,7 +35,8 @@ const JobPage = (props) => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         setUser(user)
-        //shows emails of users who applied if the user created the job posting
+
+        //show emails of users who applied if the user created the job posting
         if (user.email == job.createdBy) {
           setAppliedUsers(job.appliedEmails)
           setAppliedText('Applied:')
