@@ -6,7 +6,6 @@ import moment from 'moment'
 
 const JobBoardPage = () => {
   const [jobs, setJobs] = useState([])
-  const [newJobs, setNewJobs] = useState([])
 
   //workaround to update user on signup
   const name = localStorage.getItem('name')

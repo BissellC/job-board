@@ -166,6 +166,7 @@ nav {
   padding: 1rem;
   margin: 2rem;
   margin-top: 0;
+  margin-bottom: 1rem;
   box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.75);
 
   a {
@@ -205,6 +206,7 @@ nav {
 
 .job-board-wrapper {
   .post-job-button {
+    color: black;
     p {
       text-align: center;
       padding: 1rem;
@@ -223,6 +225,36 @@ nav {
     color: blue;
     p {
       color: blue;
+    }
+  }
+}
+
+.job-page-main {
+  background: rgb(226, 226, 226);
+  background: linear-gradient(
+    150deg,
+    rgba(226, 226, 226, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  padding: 2rem;
+  margin: 2rem;
+
+  .job-info {
+    h1 {
+      margin: 0;
+    }
+    .description {
+      padding-bottom: 1rem;
+    }
+  }
+
+  .button-wrapper {
+    text-align: center;
+
+    button {
+      background-color: white;
+      padding: 0.5rem;
+      border-radius: 5px;
     }
   }
 }

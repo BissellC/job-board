@@ -5,7 +5,7 @@ import tree from '../images/tree-icon.png'
 
 const NavBar = (props) => {
   const [logOut, setLogOut] = useState(false)
-  const [userStatus, setUserStatus] = useState('Log out')
+
   const signOut = (e) => {
     e.preventDefault()
     firebase.auth().signOut().then(setLogOut(true))
@@ -21,7 +21,7 @@ const NavBar = (props) => {
           <h1>Job Tree</h1>
         </Link>
       </header>
-      <div onClick={signOut}>{userStatus}</div>
+      <div onClick={signOut}>Log Out</div>
     </nav>
   )
 }

@@ -10,6 +10,7 @@ const JobPage = (props) => {
   const [toggleApply, setToggleApply] = useState(true)
   const [appliedMessage, setAppliedMessage] = useState('')
   const [removeMessage, setRemoveMessage] = useState('')
+  const [appliedUsers, setAppliedUsers] = useState([])
 
   var functions = firebase.functions()
 
@@ -61,7 +62,7 @@ const JobPage = (props) => {
     setToggleApply(false)
   }
 
-  //Sets posting to inactive if user created it
+  //Set posting to inactive if user created it
   const removePosting = () => {
     if (user.email == job.createdBy) {
       firebase
@@ -79,34 +80,44 @@ const JobPage = (props) => {
     }
   }
 
+  //fetch emails of users who applied if you created it
+  const getApplied = () => {
+    if (user.email == job.createdBy) {
+      setAppliedUsers(job.appliedEmails)
+    }
+  }
+
   useEffect(() => {
     getJob()
     getUser()
+    getApplied()
   }, [])
 
   return (
     <>
       <NavBar />
-      <main>
+      <main className="job-page-main">
         <section className="job-info">
           <h1>{job.jobTitle}</h1>
-          <h2>{job.companyName}</h2>
-          <p>{job.companyAddress}</p>
+          <p className="description">{job.jobDescription}</p>
+          <p>{job.companyName}</p>
+          <p>{job.location}</p>
           <p>Job type: {job.jobType}</p>
           <p>Estimated Salary: {job.estimatedSalary}</p>
-          <p>{job.jobDescription}</p>
-          <p>{moment(job.timestamp).fromNow()}</p>
+          <p>Posted {moment(job.timestamp).fromNow()}</p>
         </section>
-        <section className="apply">
-          <button className="apply-button" onClick={() => applyEmail()}>
-            Apply now
-          </button>
-          <p>{appliedMessage}</p>
-        </section>
-        <section className="remove">
-          <button onClick={() => removePosting()}>Remove posting</button>
-          <p>{removeMessage}</p>
-        </section>
+        <div className="button-wrapper">
+          <section className="apply">
+            <button className="apply-button" onClick={() => applyEmail()}>
+              Apply now
+            </button>
+            <p>{appliedMessage}</p>
+          </section>
+          <section className="remove">
+            <button onClick={() => removePosting()}>Remove posting</button>
+            <p>{removeMessage}</p>
+          </section>
+        </div>
       </main>
     </>
   )
