@@ -88,6 +88,7 @@ const PostJobPage = () => {
           <input
             placeholder="Location"
             onChange={(e) => setLocation(e.target.value)}
+            className="location"
             required
           ></input>
           <select

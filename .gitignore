@@ -27,3 +27,6 @@ sendgrid.env
 sendgrid.env
 functions/index.js
 functions/index.js
+
+# Local Netlify folder
+.netlify

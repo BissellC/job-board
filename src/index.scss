@@ -38,6 +38,10 @@ nav {
     font-size: 20px;
   }
 
+  div:hover {
+    color: gray;
+  }
+
   header {
     a {
       text-decoration: none;
@@ -300,15 +304,19 @@ nav {
     }
 
     select {
-      border: 1px solid black;
-      font-size: 20px;
-      text-align: center;
+      background-color: white;
+      padding: 0.5rem;
+      border-radius: 5px;
     }
 
     button {
+      background-color: white;
       padding: 0.5rem;
-      border: 1px solid black;
-      font-size: 20px;
+      border-radius: 5px;
+    }
+
+    .location {
+      margin-top: 0;
     }
   }
 }

@@ -5,10 +5,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "predeploy": "react-scripts build",
-    "deploy": "echo 'To setup deployment run: yarn setup-deploy'",
+    "deploy": "netlify deploy --prod --dir=build",
     "setup-deploy": "app-app --deploy && yarn deploy",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postdeploy": "echo 'Your site was deployed to https://job-board-emoy.netlify.com'"
   },
   "browserslist": [
     ">0.2%",
@@ -39,5 +40,6 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
     "sass": "^1.26.3"
-  }
+  },
+  "homepage": "https://job-board-emoy.netlify.com"
 }
